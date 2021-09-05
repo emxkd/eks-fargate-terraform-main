@@ -1,18 +1,8 @@
 provider "aws" {
   region = "ap-south-1"
-  profile = "Ajay"
+  profile = "Divya"
 }
 
-data "aws_kms_secrets" "creds" {
-  secret {
-    name    = "db"
-    payload = file("rds-creds.yml.encrypted")
-  }
-}
-
-locals {
-  db_creds = yamldecode(data.aws_kms_secrets.creds.plaintext["db"])
-}
 
 module "network" {
   source              = "./network"
